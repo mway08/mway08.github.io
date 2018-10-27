@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="配置样例首先提供一个我使用的配置样例 [client]   #password=88888888   socket=/data/var/mysql/mysql.sock    [mysqld_safe]   pid-file=/data/var/mysql/mysqld.pid   log-error = /data/local/mysql-5.7.19/log/mysql-error.log">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL my.cnf">
+<meta property="og:url" content="http://yoursite.com/2018/05/29/mysql/my.cnf/index.html">
+<meta property="og:site_name" content="老G">
+<meta property="og:description" content="配置样例首先提供一个我使用的配置样例 [client]   #password=88888888   socket=/data/var/mysql/mysql.sock    [mysqld_safe]   pid-file=/data/var/mysql/mysqld.pid   log-error = /data/local/mysql-5.7.19/log/mysql-error.log">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-27T04:41:46.152Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL my.cnf">
+<meta name="twitter:description" content="配置样例首先提供一个我使用的配置样例 [client]   #password=88888888   socket=/data/var/mysql/mysql.sock    [mysqld_safe]   pid-file=/data/var/mysql/mysqld.pid   log-error = /data/local/mysql-5.7.19/log/mysql-error.log">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/29/mysql/my.cnf/">
+
+
+
+
+
+  <title>MySQL my.cnf | 老G</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">老G</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">LeoGO</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/mysql/my.cnf/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kyros">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老G">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL my.cnf</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T18:29:44+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="配置样例"><a href="#配置样例" class="headerlink" title="配置样例"></a>配置样例</h2><p>首先提供一个我使用的配置样例</p>
+<pre><code>[client]  
+#password=88888888  
+socket=/data/var/mysql/mysql.sock  
+
+[mysqld_safe]  
+pid-file=/data/var/mysql/mysqld.pid  
+log-error = /data/local/mysql-5.7.19/log/mysql-error.log  
+
+[mysql]  
+socket=/data/var/mysql/mysql.sock  
+
+[mysqld]  
+user = mysql  
+port = 31306  
+datadir = /data/var/mysql  
+socket=/data/var/mysql/mysql.sock  
+symbolic-links=0  
+########basic settings########  
+server-id = 11  
+#bind_address = 10.166.224.32  
+autocommit = 1  
+character_set_server=utf8mb4  
+skip_name_resolve = 1  
+max_connections = 800  
+max_connect_errors = 100  
+transaction_isolation = READ-COMMITTED  
+explicit_defaults_for_timestamp = 1  
+join_buffer_size = 128M  
+tmp_table_size = 128M  
+tmpdir = /dev/shm  
+max_allowed_packet = 16M  
+sql_mode = &quot;STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER&quot;  
+interactive_timeout = 60  
+wait_timeout = 60  
+read_buffer_size = 16M  
+read_rnd_buffer_size = 32M  
+sort_buffer_size = 32M  
+########log settings########  
+#log_error = /data/local/mysql-5.7.19/log/mysql-error.log  
+slow_query_log = 1  
+slow_query_log_file = /data/local/mysql-5.7.19/log/mysql-slow.log  
+log_queries_not_using_indexes = 1  
+log_slow_admin_statements = 1  
+log_slow_slave_statements = 1  
+log_throttle_queries_not_using_indexes = 10  
+expire_logs_days = 90  
+long_query_time = 1  
+min_examined_row_limit = 100  
+########replication settings########  
+#master_info_repository = TABLE  
+#relay_log_info_repository = TABLE  
+log_bin = /data/local/mysql-5.7.19/log/mysql-bin  
+#sync_binlog = 4  
+gtid_mode = on  
+enforce_gtid_consistency = 1  
+#log_slave_updates  
+binlog_format = row  
+#relay_log = /data/local/mysql-5.7.19/log/mysql-relay.log  
+#relay_log_recovery = 1  
+#binlog_gtid_simple_recovery = 1  
+#slave_skip_errors = ddl_exist_errors  
+########innodb settings########  
+innodb_page_size = 16K  
+innodb_buffer_pool_size = 4G  
+#innodb_buffer_pool_instances = 8  
+#innodb_buffer_pool_load_at_startup = 1  
+#innodb_buffer_pool_dump_at_shutdown = 1  
+#innodb_lru_scan_depth = 2000  
+innodb_lock_wait_timeout = 5  
+#innodb_io_capacity = 4000  
+#innodb_io_capacity_max = 8000  
+#innodb_flush_method = O_DIRECT  
+#innodb_log_group_home_dir = /data/local/mysql-5.7.19/log/redolog/  
+#innodb_undo_directory = /data/local/mysql-5.7.19/log/undolog/  
+#innodb_undo_logs = 128  
+#innodb_undo_tablespaces = 0  
+#innodb_flush_neighbors = 1  
+#innodb_log_file_size = 4G  
+#innodb_log_buffer_size = 16M  
+#innodb_purge_threads = 4  
+innodb_large_prefix = 1  
+innodb_thread_concurrency = 64  
+#innodb_print_all_deadlocks = 1  
+#innodb_strict_mode = 1  
+innodb_sort_buffer_size = 64M  
+########semi sync replication settings########  
+#plugin_dir=/data/local/mysql-5.7.19/lib/plugin  
+#plugin_load = &quot;rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so&quot;  
+#loose_rpl_semi_sync_master_enabled = 1  
+#loose_rpl_semi_sync_slave_enabled = 1  
+#loose_rpl_semi_sync_master_timeout = 5000  
+
+[mysqld-5.7]  
+#innodb_buffer_pool_dump_pct = 40  
+innodb_page_cleaners = 4  
+#innodb_undo_log_truncate = 1  
+#innodb_max_undo_log_size = 2G  
+#innodb_purge_rseg_truncate_frequency = 128  
+#binlog_gtid_simple_recovery=1  
+log_timestamps=system  
+#transaction_write_set_extraction=MURMUR32  
+#show_compatibility_56=on  
+</code></pre><h2 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h2><p>[client]</p>
+<p>#password=88888888<br>mysql默认密码<br>socket=/data/var/mysql/mysql.sock<br>mysql以socket方式运行的sock文件位置</p>
+<p>[mysqld_safe]<br>log-error=/var/log/mysqld.log<br>错误日志位置<br>pid-file=/var/run/mysqld/mysqld.pid<br>进程id文件</p>
+<p>[mysql]<br>socket=/data/var/mysql/mysql.sock<br>mysql以socket方式运行的sock文件位置</p>
+<p>[mysqld]<br>user = mysql<br>mysql以什么用户运行<br>port = 31306<br>mysql运行在哪个端口<br>datadir = /data/var/mysql/<br>mysql的数据目录<br>socket=/data/var/mysql/mysql.sock<br>mysql以socket方式运行的sock文件位置<br>symbolic-links=0<br>是否支持符号链接，即数据库或表可以存储在my.cnf中指定datadir之外的分区或目录，为0不开启</p>
+<p>########basic settings########<br>server-id = 11<br>mysql的服务器分配id，在启用主从和集群的时候必须指定，每个节点必须不同</p>
+<p>#bind_address = 10.166.224.32<br>mysql监听的ip地址，如果是127.0.0.1，表示仅本机访问<br>autocommit = 1<br>数据修改是否自动提交，为0不自动提交<br>character_set_server=utf8mb4<br>服务器使用的字符集<br>skip_name_resolve = 1<br>禁用DNS主机名查找，启用以后用内网地址向mysqlslap请求响应快了一半<br>max_connections = 800<br>mysql最大连接数</p>
+<p>max_connect_errors = 1000<br>某台host连接错误次数等于max_connect_errors（默认10） ，主机’host_name’再次尝试时被屏蔽。可有效反的防止dos攻击<br>transaction_isolation = READ-COMMITTED<br>数据库事务隔离级别<br>1.READ-UNCOMMITTED(读取未提交内容)级别</p>
+<ol start="2">
+<li>READ-COMMITTED（读取提交内容）</li>
+<li>REPEATABLE-READ(可重读)<br>4.SERIERLIZED(可串行化)<br>默认级别REPEATABLE-READ<br>explicit_defaults_for_timestamp = 1<br>mysql中TIMESTAMP类型和其他的类型有点不一样(在没有设置explicit_defaults_for_timestamp=1的情况下）<br>join_buffer_size = 128M<br>当我们的join是ALL,index,rang或者Index_merge的时候使用的buffer。 实际上这种join被称为FULL JOIN<br>tmp_table_size = 128M<br>规定了内部内存临时表的最大值，每个线程都要分配。（实际起限制作用的是tmp_table_size和max_heap_table_size的最小值。）如果内存临时表超出了限制，MySQL就会自动地把它转化为基于磁盘的MyISAM表，存储在指定的tmpdir目录下<br>tmpdir = /dev/shm/mysql-tmp/<br>保存临时文件的目录<br>max_allowed_packet = 16M<br>mysql最大接受的数据包大小<br>sql_mode = “STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER”<br>sql_mode 模式，定义了你MySQL应该支持的sql语法，对数据的校验等等，限制一些所谓的‘不合法’的操作<br>interactive_timeout = 60<br>服务器关闭交互式连接前等待活动的秒数。交互式客户端定义为在mysql_real_connect()中使用CLIENT_INTERACTIVE选项的客户端<br>wait_timeout = 60<br>服务器关闭非交互连接之前等待活动的秒数，在线程启动时，根据全局wait_timeout值或全局interactive_timeout值初始化会话wait_timeout值，取决于客户端类型(由mysql_real_connect()的连接选项CLIENT_INTERACTIVE定义)<br>read_buffer_size = 16M<br>读入缓冲区的大小，将对表进行顺序扫描的请求将分配一个读入缓冲区，MySQL会为它分配一段内存缓冲区<br>read_rnd_buffer_size = 32M<br>随机读缓冲区大小，当按任意顺序读取行时（列如按照排序顺序）将分配一个随机读取缓冲区，进行排序查询时，MySQL会首先扫描一遍该缓冲，以避免磁盘搜索，提高查询速度<br>sort_buffer_size = 32M<br>是一个connection级参数，在每个connection第一次需要使用这个buffer的时候，一次性分配设置的内存</li>
+</ol>
+<p>########log settings########</p>
+<p>#log_error = /data/local/mysql-5.7.19/log/mysql-error.log<br>错误日志位置<br>slow_query_log = 1<br>是否开启慢查询日志收集<br>slow_query_log_file = /data/local/mysql-5.7.19/log/mysql-slow.log<br>慢查询日志位置<br>log_queries_not_using_indexes = 1<br>是否记录未使用索引的语句<br>log_slow_admin_statements = 1<br>慢查询也记录那些慢的optimize table，analyze table和alter table语句<br>log_slow_slave_statements = 1<br>记录由Slave所产生的慢查询<br>log_throttle_queries_not_using_indexes = 10<br>设定每分钟记录到日志的未使用索引的语句数目，超过这个数目后只记录语句数量和花费的总时间<br>expire_logs_days = 90<br>日志自动过期清理天数<br>long_query_time = 1<br>设置记录慢查询超时时间<br>min_examined_row_limit = 100<br>查询检查返回少于该参数指定行的SQL不被记录到慢查询日志</p>
+<p>########replication settings########</p>
+<p>#master_info_repository = TABLE<br>从机保存主节点信息方式，设成file时 会生成master.info 和 relay-log.info2个文件，设成table，信息就会存在mysql.master_slave_info表中。不管是设置的哪种值，都不要移动或者编辑相关的文件和表</p>
+<p>#relay_log_info_repository = TABLE<br>用于保存slave读取relay log的位置信息，可选值为“FILE”、“TABLE”，以便crash重启后继续恢复<br>log_bin = /data/local/mysql-5.7.19/log/mysql-bin<br>binlog的保存位置，不能指定确定的文件名如mysql-bin.log，只能指定位置和前缀，会生成以前缀为开头的一系列文件</p>
+<p>#sync_binlog = 4<br>这个参数是对于MySQL系统来说是至关重要的，他不仅影响到Binlog对MySQL所带来的性能损耗，而且还影响到MySQL中数据的完整性。对于“sync_binlog”参数的各种设置的说明如下：<br>sync_binlog=0，当事务提交之后，MySQL不做fsync之类的磁盘同步指令刷新binlog_cache中的信息到磁盘，而让Filesystem自行决定什么时候来做同步，或者cache满了之后才同步到磁盘。<br>sync_binlog=n，当每进行n次事务提交之后，MySQL将进行一次fsync之类的磁盘同步指令来将binlog_cache中的数据强制写入磁盘。<br>在MySQL中系统默认的设置是sync_binlog=0，也就是不做任何强制性的磁盘刷新指令，这时候的性能是最好的，但是风险也是最大的。因为一旦系统Crash，在binlog_cache中的所有binlog信息都会被丢失。而当设置为“1”的时候，是最安全但是性能损耗最大的设置。因为当设置为1的时候，即使系统Crash，也最多丢失binlog_cache中未完成的一个事务，对实际数据没有任何实质性影响。从以往经验和相关测试来看，对于高并发事务的系统来说，“sync_binlog”设置为0和设置为1的系统写入性能差距可能高达5倍甚至更多。<br>gtid_mode = on<br>启用gtid类型，否则就是普通的复制架构<br>enforce_gtid_consistency = 1<br>强制GTID的一致性</p>
+<p>#log_slave_updates<br>slave更新是否记入日志，在做双主架构时异常重要，影响到双主架构是否能互相同步<br>binlog_format = row<br>binlog日志格式，可选值“MIXED”、“ROW”、“STATEMENT”，在5.6版本之前默认为“STATEMENT”，5.6之后默认为“MIXED”；因为“STATEMENT”方式在处理一些“不确定”性的方法时会造成数据不一致问题，我们建议使用“MIXED”或者“ROW”</p>
+<p>#relay_log = /data/local/mysql-5.7.19/log/mysql-relay.log<br>从机保存同步中继日志的位置</p>
+<p>#relay_log_recovery = 1<br>当slave从库宕机后，假如relay-log损坏了，导致一部分中继日志没有处理，则自动放弃所有未执行的relay-log，并且重新从master上获取日志，这样就保证了relay-log的完整性</p>
+<p>#binlog_gtid_simple_recovery = 1<br>这个参数控制了当mysql启动或重启时，mysql在搜寻GTIDs时是如何迭代使用binlog文件的。 这个选项设置为真，会提升mysql执行恢复的性能。因为这样mysql-server启动和binlog日志清理更快</p>
+<p>#slave_skip_errors = ddl_exist_errors<br>跳过指定error no类型的错误，设成all 跳过所有错误</p>
+<p>########innodb settings########<br>innodb_page_size = 16K<br>innodb每个数据页大小，这个参数在一开始初始化时就要加入my.cnf里，如果已经创建了表，再修改，启动MySQL会报错<br>innodb_buffer_pool_size = 4G<br>缓存innodb表的索引，数据，插入数据时的缓冲，专用mysql服务器设置的大小： 操作系统内存的70%-80%最佳</p>
+<p>#innodb_buffer_pool_instances = 8<br>可以开启多个内存缓冲池，把需要缓冲的数据hash到不同的缓冲池中，这样可以并行的内存读写</p>
+<p>#innodb_buffer_pool_load_at_startup = 1<br>默认为关闭OFF。如果开启该参数，启动MySQL服务时，MySQL将本地热数据加载到InnoDB缓冲池中</p>
+<p>#innodb_buffer_pool_dump_at_shutdown = 1<br>默认为关闭OFF。如果开启该参数，停止MySQL服务时，InnoDB将InnoDB缓冲池中的热数据保存到本地硬盘</p>
+<p>#innodb_lru_scan_depth = 2000<br>根据 官方文档 描述，它会影响page cleaner线程每次刷脏页的数量， 这是一个每1秒 loop一次的线程<br>innodb_lock_wait_timeout = 5<br>事务等待获取资源等待的最长时间，超过这个时间还未分配到资源则会返回应用失败；参数的时间单位是秒</p>
+<p>#innodb_io_capacity = 4000</p>
+<p>#innodb_io_capacity_max = 8000<br>这两个设置会影响InnoDB每秒在后台执行多少操作. 大多数写IO(除了写InnoDB日志)是后台操作的. 如果你深度了解硬件性能(如每秒可以执行多少次IO操作),则使用这些功能是很可取的,而不是让它闲着</p>
+<p>#innodb_flush_method = O_DIRECT<br>默认值为 fdatasync. 如果使用 硬件RAID磁盘控制器, 可能需要设置为 O_DIRECT. 这在读取InnoDB缓冲池时可防止“双缓冲(double buffering)”效应,否则会在文件系统缓存与InnoDB缓存间形成2个副本(copy). 如果不使用硬件RAID控制器,或者使用SAN存储时, O_DIRECT 可能会导致性能下降</p>
+<p>#innodb_log_group_home_dir = /data/local/mysql-5.7.19/log/redolog/<br>innodb重做日志保存目录</p>
+<p>#innodb_undo_directory = /data/local/mysql-5.7.19/log/undolog/<br>innodb回滚日志保存目录</p>
+<p>#innodb_undo_logs = 128<br>undo回滚段的数量， 至少大于等于35，默认128</p>
+<p>#innodb_undo_tablespaces = 0<br>用于设定创建的undo表空间的个数，在mysql_install_db时初始化后，就再也不能被改动了；默认值为0，表示不独立设置undo的tablespace，默认记录到ibdata中；否则，则在undo目录下创建这么多个undo文件，例如假定设置该值为4，那么就会创建命名为undo001~undo004的undo tablespace文件，每个文件的默认大小为10M。修改该值会导致Innodb无法完成初始化，数据库无法启动，但是另两个参数可以修改</p>
+<p>#innodb_flush_neighbors = 1<br>InnoDB存储引擎在刷新一个脏页时，会检测该页所在区(extent)的所有页，如果是脏页，那么一起刷新。这样做的好处是通过AIO可以将多个IO写操作合并为一个IO操作。对于传统机械硬盘建议使用，而对于固态硬盘可以关闭。</p>
+<p>#innodb_log_file_size = 4G<br>这个值定义了日志文件的大小，innodb日志文件的作用是用来保存redo日志。一个事务对于数据或索引的修改往往对应到表空间中的随机的位置，因此当刷新这些修改到磁盘中就会引起随机的I/O，而随机的I/O往往比顺序的I/O更加昂贵的开销，因为随机的I/O需要更多的开销来定位到指定的位置。innodb使用日志来将随机的I/O转为顺序的I/O，只要日志文件是安全的，那么事务就是永久的，尽管这些改变还没有写到数据文件中，如果出现了当机或服务器断电的情况，那么innodb也可以通过日志文件来恢复以及提交的事务。但是日志文件是有一定的大小的，所以必须要把日志文件记录的改变写到数据文件中，innodb对于日志文件的操作是循环的，即当日志文件写满后，会将指针重新移动到文件开始的地方重新写，但是它不会覆盖那些还没有写到数据文件中的日志，因为这是唯一记录了事务持久化的记录<br>如果对 Innodb 数据表有大量的写入操作，那么选择合适的 innodb_log_file_size 值对提升MySQL性能很重要。然而设置太大了，就会增加恢复的时间，因此在MySQL崩溃或者突然断电等情况会令MySQL服务器花很长时间来恢复</p>
+<p>#innodb_log_buffer_size = 16M<br>事务在内存中的缓冲。 分配原 则：控制在2-8M.这个值不用太多的。他里面的内存一般一秒钟写到磁盘一次</p>
+<p>#innodb_purge_threads = 4<br>控制是否使用，使用几个独立purge线程（清除二进制日志）<br>innodb_large_prefix = 1<br>mysql在5.6之前一直都是单列索引限制767，起因是256×3-1。这个3是字符最大占用空间（utf8）。但是在5.6以后，开始支持4个字节的uutf8。255×4&gt;767, 于是增加了这个参数。这个参数默认值是OFF。当改为ON时，允许列索引最大达到3072<br>innodb_thread_concurrency = 64<br>InnoDB kernel并发最大的线程数。 1) 最少设置为(num_disks+num_cpus)*2。 2) 可以通过设置成1000来禁止这个限制</p>
+<p>#innodb_print_all_deadlocks = 1<br>是否将死锁相关信息保存到MySQL 错误日志中</p>
+<p>#innodb_strict_mode = 1<br>开启InnoDB严格检查模式，尤其采用了页数据压缩功能后，最好是开启该功能。开启此功能后，当创建表（CREATE TABLE）、更改表（ALTER TABLE）和创建索引（CREATE INDEX）语句时，如果写法有错误，不会有警告信息，而是直接抛出错误，这样就可直接将问题扼杀在摇篮里<br>innodb_sort_buffer_size = 64M<br>ORDER BY 或者GROUP BY 操作的buffer缓存大小</p>
+<p>########semi sync replication settings########</p>
+<p>#plugin_dir=/data/local/mysql-5.7.19/lib/plugin<br>指定mysql的插件目录</p>
+<p>#plugin_load = “rpl_semi_sync_master=semisync_master.so;rpl_semi_sync_slave=semisync_slave.so”<br>指定载入哪些插件</p>
+<p>#loose_rpl_semi_sync_master_enabled = 1<br>控制主库上是否开启semisync</p>
+<p>#loose_rpl_semi_sync_slave_enabled = 1<br>控制备库是否开启semisync</p>
+<p>#loose_rpl_semi_sync_master_timeout = 5000<br>单位毫秒，防止半同步复制在没有收到确认的情况下，发送堵塞。master在超时之前没有收到确认，将恢复到异步复制，继续执行半同步没有进行的操作</p>
+<p>[mysqld-5.7]</p>
+<p>#innodb_buffer_pool_dump_pct = 40<br>表示转储每个bp instance LRU上最热的page的百分比。通过设置该参数可以减少转储的page数<br>innodb_page_cleaners = 4<br>为了提升扩展性和刷脏效率，在5.7.4版本里引入了多个page cleaner线程。从而达到并行刷脏的效果<br>在该版本中，Page cleaner并未和buffer pool绑定，其模型为一个协调线程 + 多个工作线程，协调线程本身也是工作线程。因此如果innodb_page_cleaners设置为8，那么就是一个协调线程，加7个工作线程</p>
+<p>#innodb_undo_log_truncate = 1<br>是否开启在线回收（收缩）undo log日志文件，支持动态设置</p>
+<p>#innodb_max_undo_log_size = 2G<br>当超过这个阀值（默认是1G），会触发truncate回收（收缩）动作，truncate后空间缩小到10M</p>
+<p>#innodb_purge_rseg_truncate_frequency = 128<br>控制回收（收缩）undo log的频率。undo log空间在它的回滚段没有得到释放之前不会收缩， 想要增加释放回滚区间的频率，就得降低设定值</p>
+<p>#binlog_gtid_simple_recovery=1<br>这个参数控制了当mysql启动或重启时，mysql在搜寻GTIDs时是如何迭代使用binlog文件的。 这个选项设置为真，会提升mysql执行恢复的性能。因为这样mysql-server启动和binlog日志清理更快。该参数为真时，mysql-server只需打开最老的和最新的这2个binlog文件<br>log_timestamps=system<br>在MySQL 5.7.2 新增了 log_timestamps 这个参数，该参数主要是控制 error log、genera log，等等记录日志的显示时间参数。 在 5.7.2 之后改参数为默认 UTC 这样会导致日志中记录的时间比中国这边的慢，导致查看日志不方便。修改为 SYSTEM 就能解决问题</p>
+<p>#transaction_write_set_extraction=MURMUR32<br>这个神奇的参数5.7.6版本引入，用于定义一个记录事务的算法，这个算法使用hash标识来记录事务。如果使用MGR，那么这个hash值需要用于分布式冲突检测何处理，在64位的系统，官网建议设置该参数使用 XXHASH64 算法。如果线上并没有使用该功能，应该设为off</p>
+<p>#show_compatibility_56=on<br>从mysql5.7.6开始information_schema.global_status已经开始被舍弃，为了兼容性，此时需要打开 show_compatibility_56</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/29/mysql/crontab/" rel="next" title="MySQL定时备份">
+                <i class="fa fa-chevron-left"></i> MySQL定时备份
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/30/keepalived/install/" rel="prev" title="KeepAlived安装指南">
+                KeepAlived安装指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">kyros</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置样例"><span class="nav-number">1.</span> <span class="nav-text">配置样例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细解释"><span class="nav-number">2.</span> <span class="nav-text">详细解释</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kyros</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
