@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://mway08.github.io/2018/07/02/linux/linux-config/</loc>
+    <lastmod>2018-10-28T01:38:00.574Z</lastmod>
+  </url>  <url>
     <loc>https://mway08.github.io/2018/10/27/vue/lifecyle/</loc>
     <lastmod>2018-10-27T10:06:53.062Z</lastmod>
   </url>  <url>
@@ -45,9 +48,6 @@
   </url>  <url>
     <loc>https://mway08.github.io/2018/03/21/docker/docker-compose/</loc>
     <lastmod>2018-10-27T04:36:42.912Z</lastmod>
-  </url>  <url>
-    <loc>https://mway08.github.io/2018/07/02/linux/linux-config/</loc>
-    <lastmod>2018-10-27T04:34:54.420Z</lastmod>
   </url>  <url>
     <loc>https://mway08.github.io/2018/04/18/linux/linux/</loc>
     <lastmod>2018-10-27T04:34:11.337Z</lastmod>
